@@ -14,7 +14,7 @@
     .job-content { flex-grow: 1; padding: 20px; }
     .job-meta-item { margin-bottom: 8px; font-size: 0.95em; color: #495057; display: flex; align-items: center; }
     .job-meta-item i { width: 25px; color: #0d6efd; font-size: 1.1em; }
-    .req-box { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 12px; font-size: 0.9em; max-height: 180px; overflow-y: auto; color: #333; }
+    .req-box { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 12px; font-size: 0.9em; max-height: 250px; overflow-y: auto; color: #333; }
     .hidden { display: none !important; }
     .qr-container { text-align: center; margin: 15px 0; padding: 10px; background: #fff; border: 1px dashed #ccc;}
     
@@ -22,45 +22,31 @@
     .jd-btn-wrapper a:hover { background: #cfe2ff; color: #084298; }
     .jd-btn-wrapper a br { display: none; }
 
-    /* Nút Zalo nổi góc dưới bên phải */
     .zalo-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #0068ff;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50px;
-      text-align: center;
-      font-size: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: 0.3s;
+      position: fixed; bottom: 25px; right: 25px; background-color: #0068ff; color: white; width: 60px; height: 60px; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s;
     }
     .zalo-float:hover { background-color: #0052cc; color: white; transform: scale(1.1); }
   </style>
 </head>
 <body>
 
-<!-- Nút Zalo liên hệ trực tiếp -->
 <a href="https://zalo.me/0971087697" target="_blank" class="zalo-float" title="Liên hệ Zalo: 0971087697">
   <i class="bi bi-chat-dots-fill"></i>
 </a>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
   <div class="container">
-    <a class="navbar-brand fw-bold text-primary" href="#"><i class="bi bi-briefcase-fill me-2"></i>IT Jobs Portal</a>
+    <a class="navbar-brand fw-bold text-primary" href="?" style="cursor: pointer;"><i class="bi bi-briefcase-fill me-2"></i>IT Jobs Portal</a>
     <div class="d-flex align-items-center" id="authSection"></div>
   </div>
 </nav>
 
 <div class="container">
   
+  <div id="backToHomeBar" class="hidden mb-4">
+    <a href="?" class="btn btn-outline-primary fw-bold"><i class="bi bi-arrow-left me-2"></i>Xem tất cả danh sách việc làm</a>
+  </div>
+
   <!-- BẢNG ĐIỀU KHIỂN ADMIN -->
   <div id="adminPanel" class="card mb-4 hidden border-primary shadow-sm">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
@@ -131,7 +117,7 @@
   </div>
 </div>
 
-<!-- MODAL ĐĂNG KÝ (CÓ CHECKBOX ĐĂNG KÝ CTV) -->
+<!-- MODAL ĐĂNG KÝ -->
 <div class="modal fade" id="registerModal" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -155,12 +141,11 @@
               <option value="PM">Project Manager / BA</option>
             </select>
           </div>
-          <!-- Checkbox đăng ký làm CTV -->
           <div class="col-md-12 mb-3">
             <div class="form-check p-2 bg-light border rounded">
               <input class="form-check-input ms-1" type="checkbox" id="regWantCTV">
               <label class="form-check-label fw-bold text-success ms-2" for="regWantCTV">
-                <i class="bi bi-award-fill me-1"></i> Tôi muốn đăng ký làm Cộng Tác Viên (CTV) để giới thiệu việc làm và nhận hoa hồng
+                <i class="bi bi-award-fill me-1"></i> Tôi muốn đăng ký làm Cộng Tác Viên (CTV)
               </label>
             </div>
           </div>
@@ -171,7 +156,7 @@
   </div>
 </div>
 
-<!-- MODAL CẬP NHẬT HỒ SƠ (CÓ CHECKBOX ĐĂNG KÝ CTV) -->
+<!-- MODAL CẬP NHẬT HỒ SƠ -->
 <div class="modal fade" id="profileModal" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -184,7 +169,6 @@
           <div class="col-md-6 mb-3"><label>Ngành nghề tốt nghiệp</label><input type="text" id="profMajor" class="form-control" required></div>
           <div class="col-md-3 mb-3"><label>Năm tốt nghiệp</label><input type="number" id="profGrad" class="form-control" required></div>
           <div class="col-md-3 mb-3"><label>Số năm kinh nghiệm</label><input type="number" id="profYoe" class="form-control" required></div>
-          
           <div class="col-md-12 mb-3">
             <div class="form-check p-2 bg-light border rounded">
               <input class="form-check-input ms-1" type="checkbox" id="profWantCTV">
@@ -211,7 +195,7 @@
       <form id="applyForm" onsubmit="submitCV(event)">
         <div class="modal-body">
           <input type="hidden" id="applyCategory"><input type="hidden" id="applyPosition">
-          <input type="hidden" id="applySource"><input type="hidden" id="applyRef">
+          <input type="hidden" id="applySource"><input type="hidden" id="applyRef"><input type="hidden" id="applyUrl">
           <div id="ctvWarning" class="alert alert-info hidden mb-3"><strong>Chế độ CTV:</strong> Điền thông tin thay cho ứng viên.</div>
           <div class="mb-3"><label>Họ và tên ứng viên</label><input type="text" id="appName" class="form-control" required></div>
           <div class="mb-3"><label>Email ứng viên</label><input type="email" id="appEmail" class="form-control" required></div>
@@ -248,11 +232,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   // ==========================================
-  const API_URL = "https://script.google.com/macros/s/AKfycbzqs4Ap2aiNQ9eKof7hAV5BF1dCrLgtA6ilXc3GSciT2ax1ZKx3XT9jFcqyXOaWQCBCjg/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbwNdSuM4FNeFUnxyrGK9qp4cPTsizkyj7MgFZxUsjlSZq4YLZ77SEQmpHq8GoV_2beHTQ/exec";
   // ==========================================
   
   let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
   let globalJobsData = {};
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetJobName = urlParams.get('job');
+  let currentRef = urlParams.get('ref') || sessionStorage.getItem('referralBy') || '';
+  if(currentRef) sessionStorage.setItem('referralBy', currentRef);
 
   document.addEventListener("DOMContentLoaded", () => { updateAuthUI(); loadJobs(); });
 
@@ -383,15 +372,22 @@
       if(!res.success) return;
       globalJobsData = res.data;
       const tabs = document.getElementById('categoryTabs'), container = document.getElementById('jobsContainer');
-      tabs.innerHTML = ''; container.innerHTML = ''; let isFirst = true;
+      tabs.innerHTML = ''; container.innerHTML = ''; 
+      
       const currentUserRole = currentUser ? (currentUser.role || '').trim().toUpperCase() : '';
+      let foundTarget = false;
 
       for (const [category, jobs] of Object.entries(res.data)) {
-        let tabId = category.replace(/[^a-zA-Z0-9]/g, '');
-        tabs.innerHTML += `<li class="nav-item"><button class="nav-link ${isFirst?'active':''}" data-bs-toggle="pill" data-bs-target="#tab-${tabId}">${category}</button></li>`;
-        
-        let html = `<div class="tab-pane fade ${isFirst?'show active':''}" id="tab-${tabId}"><div class="row">`;
         jobs.forEach((job, index) => {
+          let plainTitle = extractPlainText(job.position);
+          
+          if (targetJobName && plainTitle.trim().toLowerCase() === targetJobName.trim().toLowerCase()) {
+            foundTarget = true;
+            document.getElementById('backToHomeBar').classList.remove('hidden');
+          } else if (targetJobName) {
+            return;
+          }
+
           let jdCleanHtml = cleanJDDisplay(job.jd);
           let jdBlock = currentUser ? (jdCleanHtml ? `<div class="mb-3 p-2 bg-light border rounded">${jdCleanHtml}</div>` : '') : `<button class="btn btn-outline-info btn-sm w-100 mb-3 fw-bold" onclick="new bootstrap.Modal(document.getElementById('authModal')).show()"><i class="bi bi-lock-fill"></i> Xem JD (Yêu cầu đăng nhập)</button>`;
 
@@ -400,29 +396,69 @@
             actionBtns += `<button class="btn btn-success w-100 mt-2 shadow-sm" onclick="openAffiliate('${category}', ${index})"><i class="bi bi-link-45deg"></i> Lấy Link Affiliate (Hoa hồng: ${job.commission || '0'})</button>`;
           }
 
-          html += `
-          <div class="col-md-6 mb-4">
+          let cardHtml = `
+          <div class="col-md-8 mx-auto mb-4">
             <div class="card job-card p-3 bg-white">
               <div class="job-content">
-                  <h4 class="text-primary fw-bold mb-3">${job.position}</h4>
-                  
+                  <h3 class="text-primary fw-bold mb-3">${job.position}</h3>
                   <div class="job-meta-item"><i class="bi bi-geo-alt-fill text-danger"></i> <span><strong>Địa điểm:</strong> ${job.location}</span></div>
                   <div class="job-meta-item"><i class="bi bi-briefcase-fill text-info"></i> <span><strong>Loại hình:</strong> ${job.type}</span></div>
                   <div class="job-meta-item"><i class="bi bi-cash-stack text-success"></i> <span><strong>Mức lương:</strong> <span class="text-danger fw-bold">${job.salary}</span></span></div>
                   <div class="job-meta-item"><i class="bi bi-translate text-warning"></i> <span><strong>Ngoại ngữ:</strong> ${job.language}</span></div>
-                  
                   <hr class="text-muted my-3">
                   ${jdBlock}
-                  
                   <div class="job-meta-item mb-1"><i class="bi bi-list-check text-primary"></i> <strong>Yêu cầu công việc:</strong></div>
                   <div class="req-box">${job.requirement}</div>
               </div>
               <div class="mt-auto px-3 pb-3">${actionBtns}</div>
             </div>
           </div>`;
+
+          if (targetJobName && plainTitle.trim().toLowerCase() === targetJobName.trim().toLowerCase()) {
+            container.innerHTML = `<div class="row">${cardHtml}</div>`;
+            return;
+          }
         });
-        container.innerHTML += html + `</div></div>`;
-        isFirst = false;
+      }
+
+      if (!targetJobName) {
+        let isFirst = true;
+        for (const [category, jobs] of Object.entries(res.data)) {
+          let tabId = category.replace(/[^a-zA-Z0-9]/g, '');
+          tabs.innerHTML += `<li class="nav-item"><button class="nav-link ${isFirst?'active':''}" data-bs-toggle="pill" data-bs-target="#tab-${tabId}">${category}</button></li>`;
+          
+          let html = `<div class="tab-pane fade ${isFirst?'show active':''}" id="tab-${tabId}"><div class="row">`;
+          jobs.forEach((job, index) => {
+            let jdCleanHtml = cleanJDDisplay(job.jd);
+            let jdBlock = currentUser ? (jdCleanHtml ? `<div class="mb-3 p-2 bg-light border rounded">${jdCleanHtml}</div>` : '') : `<button class="btn btn-outline-info btn-sm w-100 mb-3 fw-bold" onclick="new bootstrap.Modal(document.getElementById('authModal')).show()"><i class="bi bi-lock-fill"></i> Xem JD (Yêu cầu đăng nhập)</button>`;
+            let actionBtns = `<button class="btn btn-primary w-100 fw-bold shadow-sm" onclick="openApply('${category}', ${index})"><i class="bi bi-send-check me-1"></i>Ứng Tuyển & Nộp CV Ngay</button>`;
+            if(currentUser && (currentUserRole === 'CTV' || currentUserRole === 'ADMIN')) {
+              actionBtns += `<button class="btn btn-success w-100 mt-2 shadow-sm" onclick="openAffiliate('${category}', ${index})"><i class="bi bi-link-45deg"></i> Lấy Link Affiliate (Hoa hồng: ${job.commission || '0'})</button>`;
+            }
+
+            html += `
+            <div class="col-md-6 mb-4">
+              <div class="card job-card p-3 bg-white">
+                <div class="job-content">
+                    <h4 class="text-primary fw-bold mb-3">${job.position}</h4>
+                    <div class="job-meta-item"><i class="bi bi-geo-alt-fill text-danger"></i> <span><strong>Địa điểm:</strong> ${job.location}</span></div>
+                    <div class="job-meta-item"><i class="bi bi-briefcase-fill text-info"></i> <span><strong>Loại hình:</strong> ${job.type}</span></div>
+                    <div class="job-meta-item"><i class="bi bi-cash-stack text-success"></i> <span><strong>Mức lương:</strong> <span class="text-danger fw-bold">${job.salary}</span></span></div>
+                    <div class="job-meta-item"><i class="bi bi-translate text-warning"></i> <span><strong>Ngoại ngữ:</strong> ${job.language}</span></div>
+                    <hr class="text-muted my-3">
+                    ${jdBlock}
+                    <div class="job-meta-item mb-1"><i class="bi bi-list-check text-primary"></i> <strong>Yêu cầu công việc:</strong></div>
+                    <div class="req-box">${job.requirement}</div>
+                </div>
+                <div class="mt-auto px-3 pb-3">${actionBtns}</div>
+              </div>
+            </div>`;
+          });
+          container.innerHTML += html + `</div></div>`;
+          isFirst = false;
+        }
+      } else if (!foundTarget) {
+        container.innerHTML = `<div class="alert alert-warning text-center">Không tìm thấy thông tin công việc bạn yêu cầu. <a href="?" class="alert-link">Quay lại trang chủ</a></div>`;
       }
     });
   }
@@ -434,13 +470,17 @@
       return;
     }
     const job = globalJobsData[category][jobIndex];
-    document.getElementById('applyJobTitle').innerText = extractPlainText(job.position);
-    document.getElementById('applyCategory').value = category;
-    document.getElementById('applyPosition').value = extractPlainText(job.position);
+    const positionName = extractPlainText(job.position);
     
-    const roleUpper = (currentUser.role || '').trim().toUpperCase();
-    let currentRef = new URLSearchParams(window.location.search).get('ref') || sessionStorage.getItem('referralBy') || '';
+    document.getElementById('applyJobTitle').innerText = positionName;
+    document.getElementById('applyCategory').value = category;
+    document.getElementById('applyPosition').value = positionName;
+    
+    // Tạo link chính xác cho công việc cụ thể này để lưu vào Sheet
+    const specificJobUrl = `${window.location.origin}${window.location.pathname}?job=${encodeURIComponent(positionName)}`;
+    document.getElementById('applyUrl').value = specificJobUrl;
 
+    const roleUpper = (currentUser.role || '').trim().toUpperCase();
     if(roleUpper === 'CTV' || roleUpper === 'ADMIN') {
       document.getElementById('appName').value = '';
       document.getElementById('appEmail').value = '';
@@ -479,6 +519,7 @@
           phone: document.getElementById('appPhone').value,
           source: document.getElementById('applySource').value,
           ref: document.getElementById('applyRef').value,
+          currentUrl: document.getElementById('applyUrl').value,
           fileBase64: e.target.result.split(',')[1],
           mimeType: file.type,
           fileName: file.name
